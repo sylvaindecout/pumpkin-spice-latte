@@ -1,0 +1,12 @@
+.drinks {
+  height: auto;
+  max-height: 200px;
+  overflow: scroll;
+
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  align-content: flex-start;
+  align-items: flex-start;
+}

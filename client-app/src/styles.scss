@@ -1,0 +1,35 @@
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.mat-horizontal-stepper-header-container {
+  max-width: 80%;
+  margin: 5px auto 15px;
+}
+
+.header-text {
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.dialog {
+  &-container {
+    position: relative;
+    padding: 30px 30px 0;
+  }
+
+  &-footer {
+    margin: 15px;
+    display: flex;
+    flex-direction: row;
+    align-content: stretch;
+    align-items: stretch;
+    gap: 20px;
+  }
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+}

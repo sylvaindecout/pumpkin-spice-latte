@@ -1,0 +1,63 @@
+<mat-stepper labelPosition="bottom" linear>
+  <form [formGroup]="orderForm">
+    <mat-step [completed]="customerField.value">
+      <div class="dialog-container">
+        <ng-template matStepLabel>Identity</ng-template>
+        <section class="header-text">
+          <span>First name?</span>
+        </section>
+        <section>
+          <mat-form-field>
+            <input matInput type="text" required placeholder="First name" formControlName="customer" id="customer">
+          </mat-form-field>
+        </section>
+      </div>
+      <section>
+        <div class="dialog-footer">
+          <button mat-raised-button color="secondary" (click)="cancel()">Cancel</button>
+          <button mat-raised-button matStepperNext color="accent" [disabled]="!customerField.value">Next</button>
+        </div>
+      </section>
+    </mat-step>
+    <mat-step [completed]="drinkField.value">
+      <div class="dialog-container">
+        <ng-template matStepLabel>Drink</ng-template>
+        <section class="header-text">
+          <span>Choose a drink</span>
+        </section>
+        <div class="drinks">
+          <mat-radio-group *ngFor="let drink of drinks$ | async" formControlName="drink" id="drink"
+                           aria-label="Choose a drink">
+            <mat-radio-button value="{{drink.name}}">{{drink.name}} - {{drink.unitPrice | money}}</mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </div>
+      <section>
+        <div class="dialog-footer">
+          <button mat-raised-button matStepperPrevious color="secondary">Previous</button>
+          <button mat-raised-button matStepperNext color="accent" [disabled]="!drinkField.value">Next</button>
+        </div>
+      </section>
+    </mat-step>
+    <mat-step [completed]="orderForm.valid">
+      <div class="dialog-container">
+        <ng-template matStepLabel>Quantity</ng-template>
+        <section class="header-text">
+          <span>How many?</span>
+        </section>
+        <section>
+          <mat-form-field>
+            <input matInput type="number" required placeholder="Quantity" formControlName="quantity" id="quantity"
+                   [min]="1">
+          </mat-form-field>
+        </section>
+      </div>
+      <section>
+        <div class="dialog-footer">
+          <button mat-raised-button matStepperPrevious color="secondary">Previous</button>
+          <button mat-raised-button color="accent" (click)="submit()" [disabled]="orderForm.invalid">Submit</button>
+        </div>
+      </section>
+    </mat-step>
+  </form>
+</mat-stepper>

@@ -1,0 +1,13 @@
+<section>
+  <h2>Invoices</h2>
+  <div class="invoices">
+    <div *ngIf="noInvoice$ | async; else listOfInvoices">
+      <span>(no invoice yet)</span>
+    </div>
+  </div>
+  <ng-template #listOfInvoices>
+    <div *ngFor="let invoice of invoices$ | async">
+      <span>{{invoice.customer}} ordered {{invoice.quantity}}x {{invoice.drink}}. Total price: {{invoice.totalPrice | money}}</span>
+    </div>
+  </ng-template>
+</section>

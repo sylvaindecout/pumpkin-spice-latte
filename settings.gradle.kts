@@ -1,1 +1,1 @@
-include("modular-monolith")
+include("modular-monolith", "staff-simulator")

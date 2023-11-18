@@ -1,0 +1,18 @@
+application:
+  ordering:
+    infra:
+      catalogue:
+        base-url: http://localhost:8080/catalogue
+      preparation:
+        base-url: http://localhost:8080/preparation
+      stock:
+        base-url: http://localhost:8080/stock
+  preparation:
+    infra:
+      stock:
+        base-url: http://localhost:8080/stock
+logging:
+  level:
+    root: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"

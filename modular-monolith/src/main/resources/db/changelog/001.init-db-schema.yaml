@@ -1,0 +1,46 @@
+databaseChangeLog:
+  - changeSet:
+      id: init-db-schema
+      author: SDC
+      changes:
+        - createTable:
+            tableName: DRINK
+            columns:
+              - column:
+                  name: NAME
+                  type: VARCHAR(64)
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: UNIT_PRICE
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: CURRENCY
+                  type: VARCHAR(4)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: RECIPE
+                  type: JSON
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: STOCK_ITEM
+            columns:
+              - column:
+                  name: INGREDIENT
+                  type: VARCHAR(64)
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: AMOUNT
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: UNIT_OF_MEASURE
+                  type: VARCHAR(8)

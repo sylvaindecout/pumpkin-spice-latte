@@ -1,11 +1,13 @@
 package io.shodo.pumpkin.monolith.stock.infra.driven.database
 
+import io.shodo.pumpkin.annotations.HexagonalArchitecture
 import io.shodo.pumpkin.monolith.shared.domain.Ingredient
 import io.shodo.pumpkin.monolith.shared.domain.Quantity.Companion.centiliters
 import io.shodo.pumpkin.monolith.shared.domain.Quantity.Companion.grams
 import io.shodo.pumpkin.monolith.stock.domain.StockItem
 import io.shodo.pumpkin.monolith.stock.domain.StockRepository
 
+@HexagonalArchitecture.RightAdapter
 class InMemoryStockRepository : StockRepository {
 
     private val stockItems = listOf(

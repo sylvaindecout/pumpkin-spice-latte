@@ -1,5 +1,6 @@
 package io.shodo.pumpkin.monolith.stock.infra.driving.rest
 
+import io.shodo.pumpkin.annotations.HexagonalArchitecture
 import io.shodo.pumpkin.monolith.shared.domain.Ingredient
 import io.shodo.pumpkin.monolith.stock.domain.Stock
 import jakarta.validation.Valid
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/stock")
+@HexagonalArchitecture.LeftAdapter
 class StockController(private val stock: Stock) {
 
     @GetMapping("/ingredients/{name}")

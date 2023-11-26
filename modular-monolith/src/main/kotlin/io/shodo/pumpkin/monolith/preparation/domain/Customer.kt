@@ -1,5 +1,8 @@
 package io.shodo.pumpkin.monolith.preparation.domain
 
+import io.shodo.pumpkin.annotations.DomainDrivenDesign
+
+@DomainDrivenDesign.ValueObject
 @JvmInline
 value class Customer(val name: String) {
 

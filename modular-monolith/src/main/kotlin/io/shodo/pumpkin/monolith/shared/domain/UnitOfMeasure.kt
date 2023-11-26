@@ -1,5 +1,8 @@
 package io.shodo.pumpkin.monolith.shared.domain
 
+import io.shodo.pumpkin.annotations.DomainDrivenDesign
+
+@DomainDrivenDesign.ValueObject
 enum class UnitOfMeasure(val label: String, val abbreviation: String) {
 
     GRAMS("grams", "g"),

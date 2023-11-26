@@ -1,0 +1,367 @@
+openapi: 3.0.3
+info:
+  title: Pumpkin Spice Latte
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+
+tags:
+  - name: Ordering
+    description: Customer orders
+  - name: Catalogue
+    description: Drink catalogue
+  - name: Preparation
+    description: Drink preparation
+  - name: Stock
+    description: Stock of ingredients
+
+paths:
+  /preparation/drinks:
+    get:
+      tags:
+        - Preparation
+      summary: Get content
+      description: Get list of drinks currently in preparation
+      responses:
+        '200':
+          description: List of drinks currently in preparation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DrinkInPreparationResponseItem'
+    post:
+      tags:
+        - Preparation
+      summary: Queue drink
+      description: Queue drink for preparation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DrinkRequestBody'
+        required: true
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Invalid request
+  /preparation/drinks/take:
+    post:
+      tags:
+        - Preparation
+      summary: Take drink
+      description: Take drink for preparation
+      responses:
+        '204':
+          description: No content
+        '400':
+          description: Invalid request
+  /stock/ingredients/{name}:
+    put:
+      tags:
+        - Stock
+      summary: Update stock
+      description: Add or update stock item
+      parameters:
+        - name: name
+          in: path
+          description: Ingredient name
+          required: true
+          schema:
+            type: string
+            example: Milk
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StockItemUpdateRequestBody'
+        required: true
+      responses:
+        '204':
+          description: No content
+        '400':
+          description: Invalid request
+    get:
+      tags:
+        - Stock
+      summary: Find ingredient
+      description: Find ingredient in stock
+      parameters:
+        - name: name
+          in: path
+          description: Ingredient name
+          required: true
+          schema:
+            type: string
+            example: Milk
+      responses:
+        '200':
+          description: Stock item
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StockItemResponseBody'
+        '400':
+          description: Invalid request
+        '404':
+          description: Ingredient not found
+  /stock/use:
+    post:
+      tags:
+        - Stock
+      summary: Use ingredient
+      description: Use ingredient from stock
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StockUpdateRequestBody'
+        required: true
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Invalid request
+        '404':
+          description: Ingredient not found
+  /orders:
+    post:
+      tags:
+        - Ordering
+      summary: Process order
+      description: Process order from customer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderRequestBody'
+        required: true
+      responses:
+        '200':
+          description: Invoice
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvoiceResponseBody'
+        '400':
+          description: Invalid request
+        '404':
+          description: Requested drink is unknown
+        '409':
+          description: Ingredients for requested drink are out of stock
+        '503':
+          description: Access to another service failed
+  /catalogue/drinks:
+    get:
+      tags:
+        - Catalogue
+      summary: Get all drinks
+      description: Get list of all drinks in catalogue
+      responses:
+        '200':
+          description: Catalogue
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CatalogueResponseBody'
+  /catalogue/drinks/{name}:
+    put:
+      tags:
+        - Catalogue
+      summary: Update catalogue
+      description: Add or update drink in catalogue
+      parameters:
+        - name: name
+          in: path
+          description: Drink name
+          required: true
+          schema:
+            type: string
+            example: Latte
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CatalogueItemUpdateRequestBody'
+        required: true
+      responses:
+        '204':
+          description: No content
+        '400':
+          description: Invalid request
+    get:
+      tags:
+        - Catalogue
+      summary: Find drink
+      description: Find drink by name
+      parameters:
+        - name: name
+          in: path
+          description: Drink name
+          required: true
+          schema:
+            type: string
+            example: Latte
+      responses:
+        '200':
+          description: Catalogue item
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CatalogueItemResponseBody'
+        '400':
+          description: Invalid request
+        '404':
+          description: Drink not found
+
+components:
+  schemas:
+    MoneyField:
+      type: object
+      required:
+        - amountMinor
+        - currencyUnit
+        - scale
+      properties:
+        amountMinor:
+          type: integer
+          example: 1500
+        currencyUnit:
+          type: string
+          minLength: 3
+          maxLength: 3
+          example: EUR
+        scale:
+          type: integer
+          example: 2
+    QuantityField:
+      type: object
+      required:
+        - amount
+      properties:
+        amount:
+          type: integer
+          example: 500
+        unitOfMeasure:
+          type: string
+          example: mg
+    Ingredients:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/QuantityField'
+      example:
+        Coffee beans:
+          amount: 7000
+          unitOfMeasure: mg
+        Milk:
+          amount: 50
+          unitOfMeasure: mL
+    DrinkRequestBody:
+      type: object
+      required:
+        - name
+        - ingredients
+        - customer
+      properties:
+        name:
+          type: string
+          example: Latte
+        ingredients:
+          $ref: '#/components/schemas/Ingredients'
+        customer:
+          type: string
+          example: Vincent
+    StockItemResponseBody:
+      type: object
+      required:
+        - ingredient
+        - currentQuantity
+      properties:
+        ingredient:
+          type: string
+          example: Milk
+        currentQuantity:
+          $ref: '#/components/schemas/QuantityField'
+    StockItemUpdateRequestBody:
+      type: object
+      required:
+        - currentQuantity
+      properties:
+        currentQuantity:
+          $ref: '#/components/schemas/QuantityField'
+    StockUpdateRequestBody:
+      type: object
+      required:
+        - ingredient
+        - usedQuantity
+      properties:
+        ingredient:
+          type: string
+          example: Milk
+        usedQuantity:
+          $ref: '#/components/schemas/QuantityField'
+    OrderRequestBody:
+      type: object
+      required:
+        - drink
+        - quantity
+        - customer
+      properties:
+        drink:
+          type: string
+          example: Latte
+        quantity:
+          type: integer
+          example: 3
+        customer:
+          type: string
+          example: Vincent
+    InvoiceResponseBody:
+      type: object
+      required:
+        - totalPrice
+      properties:
+        totalPrice:
+          $ref: '#/components/schemas/MoneyField'
+    CatalogueItemUpdateRequestBody:
+      type: object
+      required:
+        - unitPrice
+        - ingredients
+      properties:
+        unitPrice:
+          $ref: '#/components/schemas/MoneyField'
+        ingredients:
+          $ref: '#/components/schemas/Ingredients'
+    CatalogueItemResponseBody:
+      type: object
+      required:
+        - name
+        - unitPrice
+        - ingredients
+      properties:
+        name:
+          type: string
+          example: Latte
+        unitPrice:
+          $ref: '#/components/schemas/MoneyField'
+        ingredients:
+          $ref: '#/components/schemas/Ingredients'
+    CatalogueResponseBody:
+      type: array
+      items:
+        $ref: '#/components/schemas/CatalogueItemResponseBody'
+    DrinkInPreparationResponseItem:
+      type: object
+      required:
+        - name
+        - customer
+      properties:
+        name:
+          type: string
+          example: Latte
+        customer:
+          type: string
+          example: Vincent

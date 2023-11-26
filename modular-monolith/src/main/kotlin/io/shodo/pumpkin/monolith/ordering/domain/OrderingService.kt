@@ -1,11 +1,13 @@
 package io.shodo.pumpkin.monolith.ordering.domain
 
+import io.shodo.pumpkin.annotations.DomainDrivenDesign
 import io.shodo.pumpkin.monolith.ordering.domain.menu.Menu
 import io.shodo.pumpkin.monolith.ordering.domain.menu.MenuItem
 import io.shodo.pumpkin.monolith.ordering.domain.preparation.Drink
 import io.shodo.pumpkin.monolith.ordering.domain.preparation.DrinkPreparation
 import io.shodo.pumpkin.monolith.shared.domain.DrinkName
 
+@DomainDrivenDesign.Service
 class OrderingService(
     val preparation: DrinkPreparation,
     val menu: Menu,

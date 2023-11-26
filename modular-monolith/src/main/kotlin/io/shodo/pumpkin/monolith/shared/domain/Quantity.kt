@@ -1,7 +1,9 @@
 package io.shodo.pumpkin.monolith.shared.domain
 
+import io.shodo.pumpkin.annotations.DomainDrivenDesign
 import io.shodo.pumpkin.monolith.shared.domain.UnitOfMeasure.*
 
+@DomainDrivenDesign.ValueObject
 sealed class Quantity {
 
     abstract val amount: Int

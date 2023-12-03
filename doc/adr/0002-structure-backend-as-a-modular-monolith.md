@@ -1,9 +1,10 @@
 ---
 parent: Decisions
 nav_order: 2
+status: superseded by ADR-0004
 ---
 
-# Structure backend as a modular monolith
+# ~~Structure backend as a modular monolith~~
 
 ## Context and Problem Statement
 

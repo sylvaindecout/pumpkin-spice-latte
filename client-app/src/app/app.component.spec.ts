@@ -3,7 +3,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { provideMockStore } from '@ngrx/store/testing';
 import { AppComponent } from './app.component';
-import { initialState } from './catalogue/state/catalogue.reducer';
+import { initialState } from './menu/state/menu.reducer';
 import { OrderingModule } from './ordering/ordering.module';
 import { PreparationModule } from './preparation/preparation.module';
 

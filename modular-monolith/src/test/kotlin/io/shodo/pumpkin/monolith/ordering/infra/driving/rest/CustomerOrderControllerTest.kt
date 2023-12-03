@@ -2,7 +2,7 @@ package io.shodo.pumpkin.monolith.ordering.infra.driving.rest
 
 import io.shodo.pumpkin.monolith.TestApp
 import io.shodo.pumpkin.monolith.ordering.domain.*
-import io.shodo.pumpkin.monolith.ordering.domain.catalogue.CatalogueAccessFailureException
+import io.shodo.pumpkin.monolith.ordering.domain.menu.MenuAccessFailureException
 import io.shodo.pumpkin.monolith.ordering.domain.preparation.PreparationFailureException
 import io.shodo.pumpkin.monolith.shared.domain.DrinkName
 import io.shodo.pumpkin.monolith.shared.domain.Ingredient
@@ -55,7 +55,7 @@ class CustomerOrderControllerTest {
     }
 
     @Test
-    fun should_fail_to_process_order_if_drink_is_not_in_catalogue(@Autowired mockMvc: MockMvc) {
+    fun should_fail_to_process_order_if_drink_is_not_in_menu(@Autowired mockMvc: MockMvc) {
         val requestBody = """{
             "drink": "BICYCLE",
             "quantity": 3,
@@ -91,14 +91,14 @@ class CustomerOrderControllerTest {
     }
 
     @Test
-    fun should_fail_to_process_order_if_catalogue_service_is_unavailable(@Autowired mockMvc: MockMvc) {
+    fun should_fail_to_process_order_if_menu_service_is_unavailable(@Autowired mockMvc: MockMvc) {
         val requestBody = """{
             "drink": "LATTE",
             "quantity": 3,
             "customer": "Vincent"
         }""".trimIndent()
         given(orderHandler.process(any()))
-            .willThrow(CatalogueAccessFailureException("Server responded with server error code 500"))
+            .willThrow(MenuAccessFailureException("Server responded with server error code 500"))
 
         mockMvc.post("/orders") {
             contentType = APPLICATION_JSON

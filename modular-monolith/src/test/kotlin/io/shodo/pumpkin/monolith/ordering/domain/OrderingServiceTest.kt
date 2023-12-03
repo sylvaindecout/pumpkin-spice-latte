@@ -1,6 +1,6 @@
 package io.shodo.pumpkin.monolith.ordering.domain
 
-import io.shodo.pumpkin.monolith.ordering.domain.TestCatalogueItem.LATTE
+import io.shodo.pumpkin.monolith.ordering.domain.TestMenuItem.LATTE
 import io.shodo.pumpkin.monolith.ordering.domain.preparation.Drink
 import io.shodo.pumpkin.monolith.shared.domain.DrinkName
 import org.assertj.core.api.SoftAssertions.assertSoftly
@@ -14,7 +14,7 @@ class OrderingServiceTest {
     fun should_process_order() {
         val service = OrderingService(
             preparation = { drinksSentToPreparation += it },
-            catalogue = TestCatalogueItem.asCatalogue(),
+            menu = TestMenuItem.asMenu(),
             stock = allIngredientsAreInStock()
         )
         val customer = Customer("Vincent")
@@ -34,7 +34,7 @@ class OrderingServiceTest {
     fun should_process_order_with_more_than_1_drink() {
         val service = OrderingService(
             preparation = { drinksSentToPreparation += it },
-            catalogue = TestCatalogueItem.asCatalogue(),
+            menu = TestMenuItem.asMenu(),
             stock = allIngredientsAreInStock()
         )
         val customer = Customer("Vincent")
@@ -56,7 +56,7 @@ class OrderingServiceTest {
     fun should_fail_to_process_order_if_ingredients_are_missing() {
         val service = OrderingService(
             preparation = { drinksSentToPreparation += it },
-            catalogue = TestCatalogueItem.asCatalogue(),
+            menu = TestMenuItem.asMenu(),
             stock = allIngredientsAreOutOfStock()
         )
 
@@ -71,10 +71,10 @@ class OrderingServiceTest {
     }
 
     @Test
-    fun should_fail_to_process_order_if_drink_is_not_in_catalogue() {
+    fun should_fail_to_process_order_if_drink_is_not_in_menu() {
         val service = OrderingService(
             preparation = { drinksSentToPreparation += it },
-            catalogue = TestCatalogueItem.asCatalogue(),
+            menu = TestMenuItem.asMenu(),
             stock = allIngredientsAreInStock()
         )
         val drink = DrinkName("UNKNOWN")

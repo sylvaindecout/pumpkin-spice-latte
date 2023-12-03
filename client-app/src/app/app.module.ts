@@ -7,8 +7,8 @@ import { AppComponent } from './app.component';
 import { OrderingModule } from './ordering/ordering.module';
 import { SharedModule } from './shared/shared.module';
 import { PreparationModule } from './preparation/preparation.module';
-import { catalogueReducer } from './catalogue/state/catalogue.reducer';
-import { CatalogueEffects } from './catalogue/state/catalogue.effects';
+import { menuReducer } from './menu/state/menu.reducer';
+import { MenuEffects } from './menu/state/menu.effects';
 
 @NgModule({
   declarations: [
@@ -23,10 +23,10 @@ import { CatalogueEffects } from './catalogue/state/catalogue.effects';
     BrowserAnimationsModule,
 
     StoreModule.forRoot({
-      catalogue: catalogueReducer,
+      menu: menuReducer,
     }),
     EffectsModule.forRoot([
-      CatalogueEffects
+      MenuEffects
     ]),
   ],
   providers: [],

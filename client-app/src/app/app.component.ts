@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { listenToCatalogue } from './catalogue/state/catalogue.actions';
+import { listenToMenu } from './menu/state/menu.actions';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +11,7 @@ export class AppComponent {
   constructor(
     private readonly store: Store,
   ) {
-    store.dispatch(listenToCatalogue());
+    store.dispatch(listenToMenu());
   }
 
 }

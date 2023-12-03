@@ -1,8 +1,8 @@
 application:
   ordering:
     infra:
-      catalogue:
-        base-url: http://localhost:8080/catalogue
+      menu:
+        base-url: http://localhost:8080/menu
       preparation:
         base-url: http://localhost:8080/preparation
       stock:

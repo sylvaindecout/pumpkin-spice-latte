@@ -4,7 +4,7 @@ import io.shodo.pumpkin.monolith.ordering.domain.CustomerOrderHandler
 import io.shodo.pumpkin.monolith.ordering.domain.StockAccessFailureException
 import io.shodo.pumpkin.monolith.ordering.domain.UnavailableIngredientException
 import io.shodo.pumpkin.monolith.ordering.domain.UnknownDrinkException
-import io.shodo.pumpkin.monolith.ordering.domain.catalogue.CatalogueAccessFailureException
+import io.shodo.pumpkin.monolith.ordering.domain.menu.MenuAccessFailureException
 import io.shodo.pumpkin.monolith.ordering.domain.preparation.PreparationFailureException
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus.*
@@ -28,17 +28,14 @@ class CustomerOrderController(
     @ExceptionHandler(UnavailableIngredientException::class)
     fun handleUnavailableIngredientException(ex: UnavailableIngredientException) = ResponseEntity(ex.message, CONFLICT)
 
-    @ExceptionHandler(CatalogueAccessFailureException::class)
-    fun handleCatalogueAccessFailureException(ex: CatalogueAccessFailureException) =
-        ResponseEntity(ex.message, SERVICE_UNAVAILABLE)
+    @ExceptionHandler(MenuAccessFailureException::class)
+    fun handleMenuAccessFailureException(ex: MenuAccessFailureException) = ResponseEntity(ex.message, SERVICE_UNAVAILABLE)
 
     @ExceptionHandler(PreparationFailureException::class)
-    fun handlePreparationFailureException(ex: PreparationFailureException) =
-        ResponseEntity(ex.message, SERVICE_UNAVAILABLE)
+    fun handlePreparationFailureException(ex: PreparationFailureException) = ResponseEntity(ex.message, SERVICE_UNAVAILABLE)
 
     @ExceptionHandler(StockAccessFailureException::class)
-    fun handleStockAccessFailureException(ex: StockAccessFailureException) =
-        ResponseEntity(ex.message, SERVICE_UNAVAILABLE)
+    fun handleStockAccessFailureException(ex: StockAccessFailureException) = ResponseEntity(ex.message, SERVICE_UNAVAILABLE)
 
 }
 

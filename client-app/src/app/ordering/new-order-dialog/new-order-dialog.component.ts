@@ -3,8 +3,8 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { CatalogueItem } from 'src/app/catalogue/catalogue-item';
-import { selectCatalogueItems } from 'src/app/catalogue/state/catalogue.reducer';
+import { MenuItem } from 'src/app/menu/menu-item';
+import { selectMenuItems } from 'src/app/menu/state/menu.reducer';
 import { Order } from '../order';
 import { sendOrder } from '../state/invoices.actions';
 
@@ -16,14 +16,14 @@ import { sendOrder } from '../state/invoices.actions';
 export class NewOrderDialogComponent {
 
   readonly orderForm: FormGroup;
-  readonly drinks$: Observable<CatalogueItem[]>;
+  readonly drinks$: Observable<MenuItem[]>;
 
   constructor(
     formBuilder: FormBuilder,
     private readonly store: Store,
     private readonly dialogRef: MatDialogRef<NewOrderDialogComponent>,
   ) {
-    this.drinks$ = store.select(selectCatalogueItems);
+    this.drinks$ = store.select(selectMenuItems);
     const customer = localStorage.getItem('customer');
     this.orderForm = formBuilder.group({
         customer: [customer, Validators.required],

@@ -7,6 +7,7 @@ import com.tngtech.archunit.junit.ArchTest
 import com.tngtech.archunit.junit.ArchTests
 import com.tngtech.archunit.lang.ArchRule
 import com.tngtech.archunit.library.dependencies.SlicesRuleDefinition.slices
+import io.shodo.pumpkin.rules.DomainDrivenDesignAnnotationRules
 import io.shodo.pumpkin.rules.HexagonalArchitectureAnnotationRules
 import org.junit.jupiter.api.Tag
 
@@ -25,5 +26,8 @@ class ArchitectureTest {
 
     @ArchTest
     val hexagonal_architecture_annotations: ArchTests = ArchTests.`in`(HexagonalArchitectureAnnotationRules.javaClass)
+
+    @ArchTest
+    val domain_driven_design_annotations: ArchTests = ArchTests.`in`(DomainDrivenDesignAnnotationRules.javaClass)
 
 }

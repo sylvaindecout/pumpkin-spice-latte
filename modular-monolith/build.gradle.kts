@@ -9,7 +9,7 @@ val jooqLiquibaseVersion = "3.18.7"
 val kotlinLoggingVersion = "3.0.5"
 val liquibaseVersion = "4.25.0"
 val mockitoKotlinVersion = "5.1.0"
-val testcontainersVersion = "1.19.2"
+val testcontainersVersion = "1.19.3"
 
 plugins {
   kotlin("jvm")

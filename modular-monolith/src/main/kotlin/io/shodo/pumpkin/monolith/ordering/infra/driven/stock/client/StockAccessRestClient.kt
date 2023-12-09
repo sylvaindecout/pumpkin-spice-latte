@@ -7,36 +7,29 @@ import jakarta.validation.Validator
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.http.HttpStatusCode
 import org.springframework.stereotype.Component
-import org.springframework.web.reactive.function.client.WebClient
-import org.springframework.web.reactive.function.client.bodyToMono
-import reactor.core.publisher.Mono
-import java.util.function.Predicate.not
+import org.springframework.web.client.RestClient
 
 @Component
 class StockAccessRestClient(
-    @Qualifier("stockAccessClient") private val webClient: WebClient,
+    @Qualifier("stockAccessClient") private val restClient: RestClient,
     private val validator: Validator
 ) {
 
-    fun find(ingredient: Ingredient): StockItemResponseBody? = webClient
-        .get()
-        .uri("/ingredients/{name}", ingredient.name)
-        .retrieve()
-        .onStatus(HttpStatusCode::is4xxClientError) { Mono.error(StockAccessFailureException("Server responded with client error code ${it.statusCode()}")) }
-        .onStatus(HttpStatusCode::is5xxServerError) { Mono.error(StockAccessFailureException("Server responded with server error code ${it.statusCode()}")) }
-        .bodyToMono<StockItemResponseBody>()
-        .single()
-        .onErrorMap(not(StockAccessFailureException::class::isInstance)) { thr ->
-            StockAccessFailureException(
-                thr.message ?: thr.javaClass.simpleName
-            )
-        }
-        .flatMap { requireValid(it) }
-        .block()
+    fun find(ingredient: Ingredient): StockItemResponseBody = try {
+        restClient.get().uri("/ingredients/{name}", ingredient.name)
+            .retrieve()
+            .onStatus(HttpStatusCode::is4xxClientError) { _, response -> throw StockAccessFailureException("Server responded with client error code ${response.statusCode}") }
+            .onStatus(HttpStatusCode::is5xxServerError) { _, response -> throw StockAccessFailureException("Server responded with server error code ${response.statusCode}") }
+            .body(StockItemResponseBody::class.java)!!
+            .let { requireValid(it) }
+    } catch (thr: Throwable) {
+        throw thr.takeIf { thr is StockAccessFailureException }
+            ?: StockAccessFailureException(thr.message ?: thr.javaClass.simpleName)
+    }
 
     private fun requireValid(dto: StockItemResponseBody) = validator.validate(dto)
         .takeIf { it.isNotEmpty() }
-        ?.let { Mono.error(StockAccessFailureException("Server responded with unexpected format - ${it.format()}")) }
-        ?: Mono.just(dto)
+        ?.let { throw StockAccessFailureException("Server responded with unexpected format - ${it.format()}") }
+        ?: dto
 
 }

@@ -7,36 +7,29 @@ import jakarta.validation.Validator
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.http.HttpStatusCode
 import org.springframework.stereotype.Component
-import org.springframework.web.reactive.function.client.WebClient
-import org.springframework.web.reactive.function.client.bodyToMono
-import reactor.core.publisher.Mono
-import java.util.function.Predicate.not
+import org.springframework.web.client.RestClient
 
 @Component
 class MenuAccessRestClient(
-    @Qualifier("menuAccessClient") private val webClient: WebClient,
+    @Qualifier("menuAccessClient") private val restClient: RestClient,
     private val validator: Validator
 ) {
 
-    fun find(drink: DrinkName): MenuItemResponseBody? = webClient
-        .get()
-        .uri("/drinks/{name}", drink.value)
-        .retrieve()
-        .onStatus(HttpStatusCode::is4xxClientError) { Mono.error(MenuAccessFailureException("Server responded with client error code ${it.statusCode()}")) }
-        .onStatus(HttpStatusCode::is5xxServerError) { Mono.error(MenuAccessFailureException("Server responded with server error code ${it.statusCode()}")) }
-        .bodyToMono<MenuItemResponseBody>()
-        .single()
-        .onErrorMap(not(MenuAccessFailureException::class::isInstance)) { thr ->
-            MenuAccessFailureException(
-                thr.message ?: thr.javaClass.simpleName
-            )
-        }
-        .flatMap { requireValid(it) }
-        .block()
+    fun find(drink: DrinkName): MenuItemResponseBody = try {
+        restClient.get().uri("/drinks/{name}", drink.value)
+            .retrieve()
+            .onStatus(HttpStatusCode::is4xxClientError) { _, response -> throw MenuAccessFailureException("Server responded with client error code ${response.statusCode}") }
+            .onStatus(HttpStatusCode::is5xxServerError) { _, response -> throw MenuAccessFailureException("Server responded with server error code ${response.statusCode}") }
+            .body(MenuItemResponseBody::class.java)!!
+            .let { requireValid(it) }
+    } catch (thr: Throwable) {
+        throw thr.takeIf { thr is MenuAccessFailureException }
+            ?: MenuAccessFailureException(thr.message ?: thr.javaClass.simpleName)
+    }
 
     private fun requireValid(dto: MenuItemResponseBody) = validator.validate(dto)
         .takeIf { it.isNotEmpty() }
-        ?.let { Mono.error(MenuAccessFailureException("Server responded with unexpected format - ${it.format()}")) }
-        ?: Mono.just(dto)
+        ?.let { throw MenuAccessFailureException("Server responded with unexpected format - ${it.format()}") }
+        ?: dto
 
 }

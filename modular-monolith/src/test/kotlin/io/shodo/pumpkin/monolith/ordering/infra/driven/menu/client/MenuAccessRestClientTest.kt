@@ -158,7 +158,7 @@ class MenuAccessRestClientTest {
 
         assertThatExceptionOfType(MenuAccessFailureException::class.java)
             .isThrownBy { client.find(DrinkName("LATTE")) }
-            .withMessage("Menu access failed - Source was empty")
+            .withMessageStartingWith("Menu access failed - ")
     }
 
 }

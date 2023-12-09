@@ -132,7 +132,7 @@ class StockAccessRestClientTest {
 
         assertThatExceptionOfType(StockAccessFailureException::class.java)
             .isThrownBy { client.find(Ingredient("Milk")) }
-            .withMessage("Stock access failed - Source was empty")
+            .withMessageStartingWith("Stock access failed - ")
     }
 
 }

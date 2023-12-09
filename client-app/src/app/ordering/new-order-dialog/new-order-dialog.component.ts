@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -7,11 +7,20 @@ import { MenuItem } from 'src/app/menu/menu-item';
 import { selectMenuItems } from 'src/app/menu/state/menu.reducer';
 import { Order } from '../order';
 import { sendOrder } from '../state/invoices.actions';
+import { MoneyPipe } from '../../shared/money.pipe';
+import { MatRadioModule } from '@angular/material/radio';
+import { NgFor, AsyncPipe } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatStepperModule } from '@angular/material/stepper';
 
 @Component({
   selector: 'new-order-dialog',
   templateUrl: './new-order-dialog.component.html',
-  styleUrls: ['./new-order-dialog.component.scss']
+  styleUrls: ['./new-order-dialog.component.scss'],
+  standalone: true,
+  imports: [MatStepperModule, FormsModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, NgFor, MatRadioModule, AsyncPipe, MoneyPipe],
 })
 export class NewOrderDialogComponent {
 

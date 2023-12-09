@@ -4,11 +4,15 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Invoice } from '../invoice';
 import { selectInvoices } from '../state/invoices.reducer';
+import { MoneyPipe } from '../../shared/money.pipe';
+import { NgIf, NgFor, AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'invoice-list',
   templateUrl: './invoice-list.component.html',
-  styleUrls: ['./invoice-list.component.scss']
+  styleUrls: ['./invoice-list.component.scss'],
+  standalone: true,
+  imports: [NgIf, NgFor, AsyncPipe, MoneyPipe],
 })
 export class InvoiceListComponent {
 

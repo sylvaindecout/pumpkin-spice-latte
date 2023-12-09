@@ -5,7 +5,7 @@ import { InvoiceListComponent } from './invoice-list.component';
 
 describe('InvoiceListComponent', () => {
   beforeEach(() => TestBed.configureTestingModule({
-    declarations: [InvoiceListComponent],
+    imports: [InvoiceListComponent],
     providers: [
       provideMockStore({initialState})
     ],

@@ -13,7 +13,6 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatStepperModule } from '@angular/material/stepper';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
-import { SharedModule } from '../shared/shared.module';
 import { InvoiceListComponent } from './invoice-list/invoice-list.component';
 import { NewOrderDialogComponent } from './new-order-dialog/new-order-dialog.component';
 import { OrderingComponent } from './ordering/ordering.component';
@@ -21,14 +20,7 @@ import { InvoicesEffects } from './state/invoices.effects';
 import { invoicesReducer } from './state/invoices.reducer';
 
 @NgModule({
-  declarations: [
-    InvoiceListComponent,
-    OrderingComponent,
-    NewOrderDialogComponent,
-  ],
   imports: [
-    SharedModule,
-
     StoreModule.forFeature('invoices', invoicesReducer),
     EffectsModule.forFeature([InvoicesEffects]),
 
@@ -43,6 +35,10 @@ import { invoicesReducer } from './state/invoices.reducer';
     MatSelectModule,
     MatSnackBarModule,
     MatStepperModule,
+
+    InvoiceListComponent,
+    OrderingComponent,
+    NewOrderDialogComponent,
   ],
   exports: [
     OrderingComponent,

@@ -6,15 +6,17 @@ import { AppComponent } from './app.component';
 import { initialState } from './menu/state/menu.reducer';
 import { OrderingModule } from './ordering/ordering.module';
 import { PreparationModule } from './preparation/preparation.module';
+import {HttpClientTestingModule} from "@angular/common/http/testing";
 
 describe('AppComponent', () => {
   beforeEach(() => TestBed.configureTestingModule({
-    declarations: [AppComponent],
     imports: [
       OrderingModule,
       PreparationModule,
       StoreModule.forRoot({}),
       EffectsModule.forRoot([]),
+      HttpClientTestingModule,
+      AppComponent,
     ],
     providers: [
       provideMockStore({initialState})

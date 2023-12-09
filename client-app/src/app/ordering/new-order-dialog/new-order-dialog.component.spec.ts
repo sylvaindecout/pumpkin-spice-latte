@@ -8,10 +8,10 @@ import { NewOrderDialogComponent } from './new-order-dialog.component';
 
 describe('NewOrderDialogComponent', () => {
   beforeEach(() => TestBed.configureTestingModule({
-    declarations: [NewOrderDialogComponent],
     imports: [
       MatFormFieldModule,
       MatStepperModule,
+      NewOrderDialogComponent,
     ],
     providers: [
       { provide: MatDialogRef, useValue: {} },

@@ -9,6 +9,7 @@ import { SharedModule } from './shared/shared.module';
 import { PreparationModule } from './preparation/preparation.module';
 import { menuReducer } from './menu/state/menu.reducer';
 import { MenuEffects } from './menu/state/menu.effects';
+import {NgOptimizedImage} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { MenuEffects } from './menu/state/menu.effects';
 
     BrowserModule,
     BrowserAnimationsModule,
+    NgOptimizedImage,
 
     StoreModule.forRoot({
       menu: menuReducer,

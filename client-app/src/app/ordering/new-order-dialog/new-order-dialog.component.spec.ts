@@ -1,10 +1,10 @@
-import { TestBed } from '@angular/core/testing';
-import { MatDialogRef } from '@angular/material/dialog';
-import { MatFormFieldModule } from "@angular/material/form-field";
-import { MatStepperModule } from "@angular/material/stepper";
-import { provideMockStore } from '@ngrx/store/testing';
-import { initialState } from '../state/invoices.reducer';
-import { NewOrderDialogComponent } from './new-order-dialog.component';
+import {TestBed} from '@angular/core/testing';
+import {MatDialogRef} from '@angular/material/dialog';
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatStepperModule} from "@angular/material/stepper";
+import {provideMockStore} from '@ngrx/store/testing';
+import {initialState} from '../state/invoices.reducer';
+import {NewOrderDialogComponent} from './new-order-dialog.component';
 
 describe('NewOrderDialogComponent', () => {
   beforeEach(() => TestBed.configureTestingModule({
@@ -14,7 +14,7 @@ describe('NewOrderDialogComponent', () => {
       NewOrderDialogComponent,
     ],
     providers: [
-      { provide: MatDialogRef, useValue: {} },
+      {provide: MatDialogRef, useValue: {}},
       provideMockStore({initialState}),
     ],
   }));

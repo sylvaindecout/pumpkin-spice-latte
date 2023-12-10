@@ -1,10 +1,10 @@
-import { NgModule } from '@angular/core';
+import {NgModule} from '@angular/core';
 
-import { EffectsModule } from '@ngrx/effects';
-import { StoreModule } from '@ngrx/store';
-import { PreparationListComponent } from './preparation-list/preparation-list.component';
-import { PreparationEffects } from './state/preparation.effects';
-import { preparationReducer } from './state/preparation.reducer';
+import {EffectsModule} from '@ngrx/effects';
+import {StoreModule} from '@ngrx/store';
+import {PreparationListComponent} from './preparation-list/preparation-list.component';
+import {PreparationEffects} from './state/preparation.effects';
+import {preparationReducer} from './state/preparation.reducer';
 
 @NgModule({
   imports: [
@@ -17,4 +17,5 @@ import { preparationReducer } from './state/preparation.reducer';
     PreparationListComponent,
   ],
 })
-export class PreparationModule { }
+export class PreparationModule {
+}

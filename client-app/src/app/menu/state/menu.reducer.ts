@@ -1,6 +1,6 @@
-import { createFeatureSelector, createReducer, createSelector, on } from '@ngrx/store';
-import { MenuItem } from '../menu-item';
-import { menu } from './menu.actions';
+import {createFeatureSelector, createReducer, createSelector, on} from '@ngrx/store';
+import {MenuItem} from '../menu-item';
+import {menu} from './menu.actions';
 
 export interface State {
   items: MenuItem[],
@@ -14,7 +14,7 @@ export const menuReducer = createReducer(
   initialState,
   on(menu, (state, {items}) => ({
     ...state,
-    items: [ ...items ],
+    items: [...items],
   }),)
 );
 

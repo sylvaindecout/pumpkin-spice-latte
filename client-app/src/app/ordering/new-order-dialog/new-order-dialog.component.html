@@ -26,10 +26,12 @@
           <span>Choose a drink</span>
         </section>
         <div class="drinks">
-          <mat-radio-group *ngFor="let drink of drinks$ | async" formControlName="drink" id="drink"
-                           aria-label="Choose a drink">
-            <mat-radio-button value="{{drink.name}}">{{ drink.name }} - {{ drink.unitPrice | money }}</mat-radio-button>
-          </mat-radio-group>
+          @for (drink of drinks$ | async;track drink.name) {
+            <mat-radio-group formControlName="drink" id="drink" aria-label="Choose a drink">
+              <mat-radio-button value="{{drink.name}}">{{ drink.name }}- {{ drink.unitPrice | money }}
+              </mat-radio-button>
+            </mat-radio-group>
+          }
         </div>
       </div>
       <section>

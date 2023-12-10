@@ -18,7 +18,7 @@ import {MatStepperModule} from '@angular/material/stepper';
 @Component({
   selector: 'new-order-dialog',
   templateUrl: './new-order-dialog.component.html',
-  styleUrls: ['./new-order-dialog.component.scss'],
+  styleUrl: './new-order-dialog.component.scss',
   standalone: true,
   imports: [MatStepperModule, FormsModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, NgFor, MatRadioModule, AsyncPipe, MoneyPipe],
 })

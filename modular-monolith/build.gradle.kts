@@ -4,6 +4,7 @@ import org.jooq.meta.jaxb.Logging
 import org.jooq.meta.jaxb.Nullability.NOT_NULL
 import org.jooq.meta.jaxb.Property
 
+val archunitVersion = "1.2.0"
 val jodaMoneyVersion = "1.0.4"
 val jooqLiquibaseVersion = "3.18.7"
 val kotlinLoggingVersion = "3.0.5"
@@ -53,6 +54,8 @@ dependencies {
   testImplementation("org.testcontainers", "postgresql")
 
   testImplementation("org.mockito.kotlin", "mockito-kotlin", mockitoKotlinVersion)
+  testImplementation("com.tngtech.archunit", "archunit", archunitVersion)
+  testImplementation("com.tngtech.archunit", "archunit-junit5", archunitVersion)
 }
 
 springBoot {

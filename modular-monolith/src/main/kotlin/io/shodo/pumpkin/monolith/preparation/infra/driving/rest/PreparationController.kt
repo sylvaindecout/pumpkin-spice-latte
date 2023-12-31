@@ -1,5 +1,6 @@
 package io.shodo.pumpkin.monolith.preparation.infra.driving.rest
 
+import io.shodo.pumpkin.annotations.HexagonalArchitecture
 import io.shodo.pumpkin.monolith.preparation.domain.PreparationQueueConsumption
 import io.shodo.pumpkin.monolith.preparation.domain.PreparationQueueMonitoring
 import io.shodo.pumpkin.monolith.preparation.domain.PreparationQueueSupply
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/preparation")
+@HexagonalArchitecture.LeftAdapter
 class PreparationController(
     private val supplier: PreparationQueueSupply,
     private val consumer: PreparationQueueConsumption,

@@ -1,8 +1,10 @@
 package io.shodo.pumpkin.monolith.stock.domain
 
+import io.shodo.pumpkin.annotations.DomainDrivenDesign
 import io.shodo.pumpkin.monolith.shared.domain.Ingredient
 import io.shodo.pumpkin.monolith.shared.domain.Quantity
 
+@DomainDrivenDesign.Service
 class StockAggregate(private val repository: StockRepository) : Stock {
 
     override fun find(ingredient: Ingredient): StockItem? = repository.find(ingredient)

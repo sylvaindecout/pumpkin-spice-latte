@@ -1,5 +1,6 @@
 package io.shodo.pumpkin.monolith.stock.infra.driven.database
 
+import io.shodo.pumpkin.annotations.HexagonalArchitecture
 import io.shodo.pumpkin.jooq.tables.StockItem.Companion.STOCK_ITEM
 import io.shodo.pumpkin.jooq.tables.records.StockItemRecord
 import io.shodo.pumpkin.monolith.shared.domain.Ingredient
@@ -10,6 +11,7 @@ import org.jooq.DSLContext
 import org.springframework.stereotype.Component
 
 @Component
+@HexagonalArchitecture.RightAdapter
 class JdbcStockRepository(private val dsl: DSLContext) : StockRepository {
 
     override fun find(ingredient: Ingredient): StockItem? = dsl.select()

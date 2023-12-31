@@ -1,5 +1,8 @@
 package io.shodo.pumpkin.monolith.shared.domain
 
+import io.shodo.pumpkin.annotations.DomainDrivenDesign
+
+@DomainDrivenDesign.ValueObject
 data class Recipe(private val entries: Map<Ingredient, Quantity>) {
 
     init {

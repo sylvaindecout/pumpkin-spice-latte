@@ -2,6 +2,7 @@ package io.shodo.pumpkin.monolith.menu.infra.driven.database
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
+import io.shodo.pumpkin.annotations.HexagonalArchitecture
 import io.shodo.pumpkin.jooq.tables.Drink.Companion.DRINK
 import io.shodo.pumpkin.jooq.tables.records.DrinkRecord
 import io.shodo.pumpkin.monolith.menu.domain.Drink
@@ -13,6 +14,7 @@ import org.jooq.JSON.json
 import org.springframework.stereotype.Component
 
 @Component
+@HexagonalArchitecture.RightAdapter
 class JdbcDrinkRepository(
     private val dsl: DSLContext,
     private val objectMapper: ObjectMapper

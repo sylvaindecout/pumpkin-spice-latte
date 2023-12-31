@@ -1,5 +1,8 @@
 package io.shodo.pumpkin.monolith.shared.domain
 
+import io.shodo.pumpkin.annotations.DomainDrivenDesign
+
+@DomainDrivenDesign.ValueObject
 @JvmInline
 value class DrinkName(val value: String) {
 

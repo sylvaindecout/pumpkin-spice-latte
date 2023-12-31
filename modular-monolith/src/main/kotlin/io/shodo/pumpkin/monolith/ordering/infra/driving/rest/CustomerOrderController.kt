@@ -1,5 +1,6 @@
 package io.shodo.pumpkin.monolith.ordering.infra.driving.rest
 
+import io.shodo.pumpkin.annotations.HexagonalArchitecture
 import io.shodo.pumpkin.monolith.ordering.domain.CustomerOrderHandler
 import io.shodo.pumpkin.monolith.ordering.domain.StockAccessFailureException
 import io.shodo.pumpkin.monolith.ordering.domain.UnavailableIngredientException
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/orders")
+@HexagonalArchitecture.LeftAdapter
 class CustomerOrderController(
     private val orderHandler: CustomerOrderHandler
 ) {

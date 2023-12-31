@@ -1,5 +1,6 @@
 package io.shodo.pumpkin.monolith.menu.infra.driven.database
 
+import io.shodo.pumpkin.annotations.HexagonalArchitecture
 import io.shodo.pumpkin.monolith.menu.domain.Drink
 import io.shodo.pumpkin.monolith.menu.domain.DrinkRepository
 import io.shodo.pumpkin.monolith.shared.domain.DrinkName
@@ -10,6 +11,7 @@ import io.shodo.pumpkin.monolith.shared.domain.Recipe
 import org.joda.money.CurrencyUnit.EUR
 import org.joda.money.Money
 
+@HexagonalArchitecture.RightAdapter
 class InMemoryDrinkRepository : DrinkRepository {
 
     private val items = listOf(

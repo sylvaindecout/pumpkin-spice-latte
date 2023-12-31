@@ -1,5 +1,6 @@
 package io.shodo.pumpkin.monolith.ordering.infra.driven.preparation
 
+import io.shodo.pumpkin.annotations.HexagonalArchitecture
 import io.shodo.pumpkin.monolith.ordering.domain.preparation.Drink
 import io.shodo.pumpkin.monolith.ordering.domain.preparation.DrinkPreparation
 import io.shodo.pumpkin.monolith.ordering.infra.driven.preparation.client.PreparationRestClient
@@ -8,6 +9,7 @@ import mu.KotlinLogging
 import org.springframework.stereotype.Component
 
 @Component
+@HexagonalArchitecture.RightAdapter
 class DrinkPreparationAdapter(private val client: PreparationRestClient) : DrinkPreparation {
 
     private val logger = KotlinLogging.logger {}

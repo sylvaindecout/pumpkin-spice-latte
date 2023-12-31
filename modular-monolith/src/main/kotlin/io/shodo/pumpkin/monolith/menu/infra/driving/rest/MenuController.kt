@@ -1,5 +1,6 @@
 package io.shodo.pumpkin.monolith.menu.infra.driving.rest
 
+import io.shodo.pumpkin.annotations.HexagonalArchitecture
 import io.shodo.pumpkin.monolith.menu.domain.Drink
 import io.shodo.pumpkin.monolith.menu.domain.Menu
 import io.shodo.pumpkin.monolith.shared.domain.DrinkName
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/menu")
+@HexagonalArchitecture.LeftAdapter
 class MenuController(private val menu: Menu) {
 
     @GetMapping("/drinks/")

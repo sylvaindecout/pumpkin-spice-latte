@@ -7,10 +7,12 @@ import { OrderingComponent } from './ordering.component';
 
 describe('OrderingComponent', () => {
   beforeEach(() => TestBed.configureTestingModule({
-    imports: [
-      MatDialogModule,
+    declarations: [
       OrderingComponent,
       InvoiceListComponent,
+    ],
+    imports:[
+      MatDialogModule,
     ],
     providers: [
       provideMockStore({initialState}),

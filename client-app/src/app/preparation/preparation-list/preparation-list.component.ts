@@ -4,17 +4,10 @@ import { Observable, map } from 'rxjs';
 import { DrinkInPreparation } from '../drink-in-preparation';
 import { listenToDrinksInPreparation } from '../state/preparation.actions';
 import { selectDrinksInPreparation } from '../state/preparation.reducer';
-import { NgIf, NgFor, AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'preparation-list',
   templateUrl: './preparation-list.component.html',
-  standalone: true,
-  imports: [
-    NgIf,
-    NgFor,
-    AsyncPipe,
-  ],
 })
 export class PreparationListComponent {
 

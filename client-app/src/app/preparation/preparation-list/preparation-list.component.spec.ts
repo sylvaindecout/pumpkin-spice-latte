@@ -5,7 +5,7 @@ import { PreparationListComponent } from './preparation-list.component';
 
 describe('PreparationListComponent', () => {
   beforeEach(() => TestBed.configureTestingModule({
-    imports: [PreparationListComponent],
+    declarations: [PreparationListComponent],
     providers: [
       provideMockStore({initialState})
     ],

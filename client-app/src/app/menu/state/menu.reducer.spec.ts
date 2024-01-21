@@ -1,5 +1,5 @@
-import { MenuItem } from '../menu-item';
-import { menu } from './menu.actions';
+import {MenuItem} from '../menu-item';
+import {menu} from './menu.actions';
 import * as fromReducer from './menu.reducer';
 
 describe('MenuEffects', () => {

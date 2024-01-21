@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { Observable, map } from 'rxjs';
-import { DrinkInPreparation } from '../drink-in-preparation';
-import { listenToDrinksInPreparation } from '../state/preparation.actions';
-import { selectDrinksInPreparation } from '../state/preparation.reducer';
+import {Component} from '@angular/core';
+import {Store} from '@ngrx/store';
+import {map, Observable} from 'rxjs';
+import {DrinkInPreparation} from '../drink-in-preparation';
+import {listenToDrinksInPreparation} from '../state/preparation.actions';
+import {selectDrinksInPreparation} from '../state/preparation.reducer';
 
 @Component({
   selector: 'preparation-list',
@@ -24,4 +24,4 @@ export class PreparationListComponent {
     return this.drinks$.pipe(map(list => list.length < 1));
   }
 
- }
+}

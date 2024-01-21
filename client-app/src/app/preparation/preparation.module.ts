@@ -1,11 +1,11 @@
-import { NgModule } from '@angular/core';
+import {NgModule} from '@angular/core';
 
-import { EffectsModule } from '@ngrx/effects';
-import { StoreModule } from '@ngrx/store';
-import { SharedModule } from '../shared/shared.module';
-import { PreparationListComponent } from './preparation-list/preparation-list.component';
-import { PreparationEffects } from './state/preparation.effects';
-import { preparationReducer } from './state/preparation.reducer';
+import {EffectsModule} from '@ngrx/effects';
+import {StoreModule} from '@ngrx/store';
+import {SharedModule} from '../shared/shared.module';
+import {PreparationListComponent} from './preparation-list/preparation-list.component';
+import {PreparationEffects} from './state/preparation.effects';
+import {preparationReducer} from './state/preparation.reducer';
 
 @NgModule({
   declarations: [
@@ -21,4 +21,5 @@ import { preparationReducer } from './state/preparation.reducer';
     PreparationListComponent,
   ],
 })
-export class PreparationModule { }
+export class PreparationModule {
+}

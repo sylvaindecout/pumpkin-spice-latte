@@ -1,14 +1,14 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { EffectsModule } from '@ngrx/effects';
-import { StoreModule } from '@ngrx/store';
-import { AppComponent } from './app.component';
-import { OrderingModule } from './ordering/ordering.module';
-import { SharedModule } from './shared/shared.module';
-import { PreparationModule } from './preparation/preparation.module';
-import { menuReducer } from './menu/state/menu.reducer';
-import { MenuEffects } from './menu/state/menu.effects';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {EffectsModule} from '@ngrx/effects';
+import {StoreModule} from '@ngrx/store';
+import {AppComponent} from './app.component';
+import {OrderingModule} from './ordering/ordering.module';
+import {SharedModule} from './shared/shared.module';
+import {PreparationModule} from './preparation/preparation.module';
+import {menuReducer} from './menu/state/menu.reducer';
+import {MenuEffects} from './menu/state/menu.effects';
 
 @NgModule({
   declarations: [
@@ -32,4 +32,5 @@ import { MenuEffects } from './menu/state/menu.effects';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

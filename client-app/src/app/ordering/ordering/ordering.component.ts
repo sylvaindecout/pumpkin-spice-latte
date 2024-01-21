@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { NewOrderDialogComponent } from '../new-order-dialog/new-order-dialog.component';
+import {Component} from '@angular/core';
+import {MatDialog} from '@angular/material/dialog';
+import {NewOrderDialogComponent} from '../new-order-dialog/new-order-dialog.component';
 
 @Component({
   selector: 'ordering',

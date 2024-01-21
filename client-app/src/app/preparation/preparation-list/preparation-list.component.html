@@ -7,7 +7,7 @@
   </div>
   <ng-template #listOfDrinks>
     <div *ngFor="let drink of drinks$ | async">
-      <span>{{drink.customer}} is waiting for their {{drink.name}}</span>
+      <span>{{ drink.customer }} is waiting for their {{ drink.name }}</span>
     </div>
   </ng-template>
 </section>

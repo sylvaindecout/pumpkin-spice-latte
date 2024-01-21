@@ -8,14 +8,18 @@
         </section>
         <section>
           <mat-form-field>
-            <input matInput type="text" required placeholder="First name" formControlName="customer" id="customer">
+            <input matInput type="text" required
+                   placeholder="First name" formControlName="customer"
+                   id="customer">
           </mat-form-field>
         </section>
       </div>
       <section>
         <div class="dialog-footer">
           <button mat-raised-button color="secondary" (click)="cancel()">Cancel</button>
-          <button mat-raised-button matStepperNext color="accent" [disabled]="!customerField.value">Next</button>
+          <button mat-raised-button matStepperNext color="accent" [disabled]="!customerField.value">
+            Next
+          </button>
         </div>
       </section>
     </mat-step>
@@ -26,9 +30,11 @@
           <span>Choose a drink</span>
         </section>
         <div class="drinks">
-          <mat-radio-group *ngFor="let drink of drinks$ | async" formControlName="drink" id="drink"
-                           aria-label="Choose a drink">
-            <mat-radio-button value="{{drink.name}}">{{drink.name}} - {{drink.unitPrice | money}}</mat-radio-button>
+          <mat-radio-group *ngFor="let drink of drinks$ | async"
+                           formControlName="drink" id="drink" aria-label="Choose a drink">
+            <mat-radio-button value="{{drink.name}}">
+              {{ drink.name }} - {{ drink.unitPrice | money }}
+            </mat-radio-button>
           </mat-radio-group>
         </div>
       </div>
@@ -47,7 +53,8 @@
         </section>
         <section>
           <mat-form-field>
-            <input matInput type="number" required placeholder="Quantity" formControlName="quantity" id="quantity"
+            <input matInput type="number" required
+                   placeholder="Quantity" formControlName="quantity" id="quantity"
                    [min]="1">
           </mat-form-field>
         </section>
@@ -55,7 +62,9 @@
       <section>
         <div class="dialog-footer">
           <button mat-raised-button matStepperPrevious color="secondary">Previous</button>
-          <button mat-raised-button color="accent" (click)="submit()" [disabled]="orderForm.invalid">Submit</button>
+          <button mat-raised-button color="accent" (click)="submit()" [disabled]="orderForm.invalid">
+            Submit
+          </button>
         </div>
       </section>
     </mat-step>

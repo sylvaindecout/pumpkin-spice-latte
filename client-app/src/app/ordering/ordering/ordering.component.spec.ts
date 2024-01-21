@@ -1,9 +1,9 @@
-import { TestBed } from '@angular/core/testing';
-import { MatDialogModule } from '@angular/material/dialog';
-import { provideMockStore } from '@ngrx/store/testing';
-import { InvoiceListComponent } from '../invoice-list/invoice-list.component';
-import { initialState } from '../state/invoices.reducer';
-import { OrderingComponent } from './ordering.component';
+import {TestBed} from '@angular/core/testing';
+import {MatDialogModule} from '@angular/material/dialog';
+import {provideMockStore} from '@ngrx/store/testing';
+import {InvoiceListComponent} from '../invoice-list/invoice-list.component';
+import {initialState} from '../state/invoices.reducer';
+import {OrderingComponent} from './ordering.component';
 
 describe('OrderingComponent', () => {
   beforeEach(() => TestBed.configureTestingModule({
@@ -11,7 +11,7 @@ describe('OrderingComponent', () => {
       OrderingComponent,
       InvoiceListComponent,
     ],
-    imports:[
+    imports: [
       MatDialogModule,
     ],
     providers: [

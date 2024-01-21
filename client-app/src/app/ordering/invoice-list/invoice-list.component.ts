@@ -10,7 +10,7 @@ import {AsyncPipe, NgFor, NgIf} from '@angular/common';
 @Component({
   selector: 'invoice-list',
   templateUrl: './invoice-list.component.html',
-  styleUrl: './invoice-list.component.scss',
+  styleUrls: ['./invoice-list.component.scss'],
   standalone: true,
   imports: [NgIf, NgFor, AsyncPipe, MoneyPipe],
 })

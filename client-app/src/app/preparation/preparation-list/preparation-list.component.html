@@ -1,14 +1,13 @@
 <section>
   <h2>Drinks in preparation</h2>
   <div class="drinks">
-    @if (noDrinks$ | async) {
+    <div *ngIf="noDrinks$ | async; else listOfDrinks">
       <span>(waiting for new orders)</span>
-    } @else {
-      @for (drink of drinks$ | async;track drink.name) {
-        <div>
-          <span>{{ drink.customer }} is waiting for their {{ drink.name }}</span>
-        </div>
-      }
-    }
+    </div>
   </div>
+  <ng-template #listOfDrinks>
+    <div *ngFor="let drink of drinks$ | async">
+      <span>{{ drink.customer }} is waiting for their {{ drink.name }}</span>
+    </div>
+  </ng-template>
 </section>

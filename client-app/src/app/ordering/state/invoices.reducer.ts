@@ -1,6 +1,6 @@
-import {createFeatureSelector, createReducer, createSelector, on} from '@ngrx/store';
-import {Invoice} from '../invoice';
-import {newInvoice} from './invoices.actions';
+import { createFeatureSelector, createReducer, createSelector, on } from '@ngrx/store';
+import { Invoice } from '../invoice';
+import { newInvoice } from './invoices.actions';
 
 export interface State {
   invoices: Invoice[],
@@ -14,7 +14,7 @@ export const invoicesReducer = createReducer(
   initialState,
   on(newInvoice, (state, {invoice}) => ({
     ...state,
-    invoices: [...state.invoices, invoice],
+    invoices: [ ...state.invoices, invoice ],
   }),)
 );
 

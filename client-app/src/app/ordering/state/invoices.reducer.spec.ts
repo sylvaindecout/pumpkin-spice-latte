@@ -1,5 +1,5 @@
-import {Invoice} from '../invoice';
-import {newInvoice} from './invoices.actions';
+import { Invoice } from '../invoice';
+import { newInvoice } from './invoices.actions';
 import * as fromReducer from './invoices.reducer';
 
 describe('InvoicesReducer', () => {

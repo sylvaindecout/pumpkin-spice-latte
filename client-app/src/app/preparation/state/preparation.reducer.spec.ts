@@ -1,4 +1,4 @@
-import {drinksInPreparation} from './preparation.actions';
+import { drinksInPreparation } from './preparation.actions';
 import * as fromReducer from './preparation.reducer';
 
 describe('PreparationReducer', () => {
@@ -8,7 +8,7 @@ describe('PreparationReducer', () => {
       name: 'Latte',
       customer: 'Giorgio',
     };
-    const state: fromReducer.State = {drinks: []};
+    const state: fromReducer.State = { drinks: [] };
 
     const updatedState = fromReducer.preparationReducer(state, drinksInPreparation({drinks: [drink]}));
 

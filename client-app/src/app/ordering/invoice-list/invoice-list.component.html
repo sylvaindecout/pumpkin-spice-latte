@@ -7,10 +7,7 @@
   </div>
   <ng-template #listOfInvoices>
     <div *ngFor="let invoice of invoices$ | async">
-      <span>
-        {{ invoice.customer }} ordered {{ invoice.quantity }}x {{ invoice.drink }}.
-        Total price: {{ invoice.totalPrice | money }}
-      </span>
+      <span>{{invoice.customer}} ordered {{invoice.quantity}}x {{invoice.drink}}. Total price: {{invoice.totalPrice | money}}</span>
     </div>
   </ng-template>
 </section>

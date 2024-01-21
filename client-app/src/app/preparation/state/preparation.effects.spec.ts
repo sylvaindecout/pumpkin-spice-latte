@@ -1,17 +1,15 @@
-import {Action, ActionsSubject} from '@ngrx/store';
-import {Observable, of} from 'rxjs';
-import {DrinkInPreparation} from '../drink-in-preparation';
-import {PreparationService} from '../preparation.service';
-import {drinksInPreparation, refreshDrinksInPreparation} from './preparation.actions';
-import {PreparationEffects} from './preparation.effects';
+import { Action, ActionsSubject } from '@ngrx/store';
+import { Observable, of } from 'rxjs';
+import { DrinkInPreparation } from '../drink-in-preparation';
+import { PreparationService } from '../preparation.service';
+import { drinksInPreparation, refreshDrinksInPreparation } from './preparation.actions';
+import { PreparationEffects } from './preparation.effects';
 
 describe('InvoicesEffects', () => {
 
   const actions$ = new ActionsSubject();
   const preparationServiceMock = <PreparationService>{
-    findAll(): Observable<DrinkInPreparation[]> {
-      return of();
-    }
+    findAll(): Observable<DrinkInPreparation[]> { return of(); }
   };
   const effects = new PreparationEffects(actions$, preparationServiceMock);
 
@@ -26,7 +24,7 @@ describe('InvoicesEffects', () => {
 
     actions$.next(refreshDrinksInPreparation());
 
-    expect(result).toEqual([drinksInPreparation({drinks})]);
+    expect(result).toEqual([drinksInPreparation({ drinks })]);
   });
 
 });

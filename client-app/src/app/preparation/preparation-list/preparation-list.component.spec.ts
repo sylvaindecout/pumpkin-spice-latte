@@ -1,7 +1,7 @@
-import {TestBed} from '@angular/core/testing';
-import {provideMockStore} from "@ngrx/store/testing";
-import {initialState} from '../state/preparation.reducer';
-import {PreparationListComponent} from './preparation-list.component';
+import { TestBed } from '@angular/core/testing';
+import { provideMockStore } from "@ngrx/store/testing";
+import { initialState } from '../state/preparation.reducer';
+import { PreparationListComponent } from './preparation-list.component';
 
 describe('PreparationListComponent', () => {
   beforeEach(() => TestBed.configureTestingModule({

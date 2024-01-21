@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
-import {Actions, createEffect, ofType} from '@ngrx/effects';
-import {map, mergeMap, timer} from 'rxjs';
-import {switchMap} from 'rxjs/operators';
-import {MenuService} from '../menu.service';
+import { Injectable } from '@angular/core';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { map, mergeMap, timer } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
+import { MenuService } from '../menu.service';
 import * as actions from './menu.actions';
 
 @Injectable()
@@ -11,7 +11,7 @@ export class MenuEffects {
   constructor(
     private readonly actions$: Actions,
     private readonly menuService: MenuService,
-  ) {
+  ){
   }
 
   listenToMenu$ = createEffect(() => this.actions$.pipe(

@@ -1,18 +1,16 @@
-import {Action, ActionsSubject} from '@ngrx/store';
-import {Observable, of} from 'rxjs';
-import {Invoice} from '../invoice';
-import {Order} from '../order';
-import {OrderingService} from '../ordering.service';
-import {newInvoice, sendOrder} from './invoices.actions';
-import {InvoicesEffects} from './invoices.effects';
+import { Action, ActionsSubject } from '@ngrx/store';
+import { Observable, of } from 'rxjs';
+import { Invoice } from '../invoice';
+import { Order } from '../order';
+import { OrderingService } from '../ordering.service';
+import { newInvoice, sendOrder } from './invoices.actions';
+import { InvoicesEffects } from './invoices.effects';
 
 describe('InvoicesEffects', () => {
 
   const actions$ = new ActionsSubject();
   const orderingServiceMock = <OrderingService>{
-    process(_: Order): Observable<Invoice> {
-      return of();
-    }
+    process(order: Order): Observable<Invoice> { return of(); }
   };
   const effects = new InvoicesEffects(actions$, orderingServiceMock);
 
@@ -36,9 +34,9 @@ describe('InvoicesEffects', () => {
     const result: Action[] = [];
     effects.sendOrder$.subscribe((action) => result.push(action));
 
-    actions$.next(sendOrder({order}));
+    actions$.next(sendOrder({ order }));
 
-    expect(result).toEqual([newInvoice({invoice})]);
+    expect(result).toEqual([newInvoice({ invoice })]);
   });
 
 });

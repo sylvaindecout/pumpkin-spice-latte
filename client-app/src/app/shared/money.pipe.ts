@@ -1,6 +1,6 @@
-import {formatCurrency, getCurrencySymbol} from '@angular/common';
-import {Pipe, PipeTransform} from '@angular/core';
-import {Money} from './money';
+import { formatCurrency, getCurrencySymbol } from '@angular/common';
+import { Pipe, PipeTransform } from '@angular/core';
+import { Money } from './money';
 
 @Pipe({
   name: 'money',

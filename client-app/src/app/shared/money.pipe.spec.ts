@@ -1,4 +1,5 @@
-import {MoneyPipe} from './money.pipe';
+import { TestBed } from '@angular/core/testing';
+import { MoneyPipe } from './money.pipe';
 
 describe('MoneyPipe', () => {
 

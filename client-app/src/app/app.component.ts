@@ -1,8 +1,8 @@
-import {Component} from '@angular/core';
-import {Store} from '@ngrx/store';
-import {listenToMenu} from './menu/state/menu.actions';
-import {PreparationListComponent} from './preparation/preparation-list/preparation-list.component';
-import {OrderingComponent} from './ordering/ordering/ordering.component';
+import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { listenToMenu } from './menu/state/menu.actions';
+import { PreparationListComponent } from './preparation/preparation-list/preparation-list.component';
+import { OrderingComponent } from './ordering/ordering/ordering.component';
 import {NgOptimizedImage} from "@angular/common";
 
 @Component({

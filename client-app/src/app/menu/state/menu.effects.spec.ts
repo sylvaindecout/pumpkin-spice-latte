@@ -1,17 +1,15 @@
-import {Action, ActionsSubject} from '@ngrx/store';
-import {Observable, of} from 'rxjs';
-import {MenuItem} from '../menu-item';
-import {MenuService} from '../menu.service';
-import {menu, refreshMenu} from './menu.actions';
-import {MenuEffects} from './menu.effects';
+import { Action, ActionsSubject } from '@ngrx/store';
+import { Observable, of } from 'rxjs';
+import { MenuItem } from '../menu-item';
+import { MenuService } from '../menu.service';
+import { menu, refreshMenu } from './menu.actions';
+import { MenuEffects } from './menu.effects';
 
 describe('MenuEffects', () => {
 
   const actions$ = new ActionsSubject();
   const orderingServiceMock = <MenuService>{
-    findAllDrinks(): Observable<MenuItem[]> {
-      return of();
-    }
+    findAllDrinks(): Observable<MenuItem[]> { return of(); }
   };
   const effects = new MenuEffects(actions$, orderingServiceMock);
 
@@ -30,7 +28,7 @@ describe('MenuEffects', () => {
 
     actions$.next(refreshMenu());
 
-    expect(result).toEqual([menu({items: [item1]})]);
+    expect(result).toEqual([menu({ items: [item1] })]);
   });
 
 });

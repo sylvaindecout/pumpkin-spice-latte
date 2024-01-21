@@ -1,7 +1,8 @@
-import {HttpClient} from '@angular/common/http';
-import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
-import {DrinkInPreparation} from './drink-in-preparation';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { DrinkInPreparation } from './drink-in-preparation';
+import { PreparationModule } from './preparation.module';
 
 @Injectable({
   providedIn: 'root'

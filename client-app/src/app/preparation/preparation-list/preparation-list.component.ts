@@ -13,9 +13,7 @@ export class PreparationListComponent {
 
   readonly drinks$: Observable<DrinkInPreparation[]>;
 
-  constructor(
-    private readonly store: Store,
-  ) {
+  constructor(store: Store) {
     this.drinks$ = store.select(selectDrinksInPreparation);
     store.dispatch(listenToDrinksInPreparation());
   }

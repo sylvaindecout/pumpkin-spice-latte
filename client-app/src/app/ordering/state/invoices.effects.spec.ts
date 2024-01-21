@@ -10,7 +10,7 @@ describe('InvoicesEffects', () => {
 
   const actions$ = new ActionsSubject();
   const orderingServiceMock = <OrderingService>{
-    process(order: Order): Observable<Invoice> {
+    process(_: Order): Observable<Invoice> {
       return of();
     }
   };

@@ -14,9 +14,7 @@ export class InvoiceListComponent {
 
   readonly invoices$: Observable<Invoice[]>;
 
-  constructor(
-    private readonly store: Store,
-  ) {
+  constructor(store: Store) {
     this.invoices$ = store.select(selectInvoices).pipe(map(invoices => [...invoices].reverse()));
   }
 

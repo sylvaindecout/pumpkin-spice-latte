@@ -8,9 +8,7 @@ import {listenToMenu} from './menu/state/menu.actions';
 })
 export class AppComponent {
 
-  constructor(
-    private readonly store: Store,
-  ) {
+  constructor(store: Store) {
     store.dispatch(listenToMenu());
   }
 

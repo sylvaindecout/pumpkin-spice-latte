@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { listenToMenu } from './menu/state/menu.actions';
+import {Component} from '@angular/core';
+import {Store} from '@ngrx/store';
+import {listenToMenu} from './menu/state/menu.actions';
 
 @Component({
   selector: 'app-root',

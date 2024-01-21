@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { Invoice } from '../invoice';
-import { selectInvoices } from '../state/invoices.reducer';
+import {Component} from '@angular/core';
+import {Store} from '@ngrx/store';
+import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
+import {Invoice} from '../invoice';
+import {selectInvoices} from '../state/invoices.reducer';
 
 @Component({
   selector: 'invoice-list',

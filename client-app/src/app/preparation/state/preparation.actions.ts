@@ -1,5 +1,5 @@
-import { createAction, props } from '@ngrx/store';
-import { DrinkInPreparation } from '../drink-in-preparation';
+import {createAction, props} from '@ngrx/store';
+import {DrinkInPreparation} from '../drink-in-preparation';
 
 export const listenToDrinksInPreparation = createAction('listenToDrinksInPreparation');
 export const refreshDrinksInPreparation = createAction('refreshDrinksInPreparation');

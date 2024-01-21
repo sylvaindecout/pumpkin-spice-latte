@@ -1,6 +1,6 @@
-import { createFeatureSelector, createReducer, createSelector, on } from '@ngrx/store';
-import { DrinkInPreparation } from '../drink-in-preparation';
-import { drinksInPreparation } from './preparation.actions';
+import {createFeatureSelector, createReducer, createSelector, on} from '@ngrx/store';
+import {DrinkInPreparation} from '../drink-in-preparation';
+import {drinksInPreparation} from './preparation.actions';
 
 export interface State {
   drinks: DrinkInPreparation[],

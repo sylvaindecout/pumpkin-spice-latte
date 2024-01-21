@@ -1,11 +1,11 @@
-import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
-import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MoneyPipe } from './money.pipe';
+import {CommonModule} from '@angular/common';
+import {HttpClientModule} from '@angular/common/http';
+import {NgModule} from '@angular/core';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MoneyPipe} from './money.pipe';
 
 @NgModule({
-  declarations:[
+  declarations: [
     MoneyPipe,
   ],
   imports: [
@@ -23,4 +23,5 @@ import { MoneyPipe } from './money.pipe';
     MoneyPipe,
   ]
 })
-export class SharedModule { }
+export class SharedModule {
+}

@@ -1,4 +1,4 @@
-import { Money } from '../shared/money';
+import {Money} from '../shared/money';
 
 export interface Invoice {
   drink: string,

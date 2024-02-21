@@ -27,3 +27,20 @@ services:
       timeout: 5s
       retries: 5
       start_period: 10s
+
+  staff-simulator:
+    build: ./staff-simulator
+    depends_on:
+      modular-monolith:
+        condition: service_healthy
+    environment:
+      APPLICATION_STAFF_SIMULATOR_INFRA_PREPARATION_BASE_URL: http://modular-monolith:8080/preparation
+    ports:
+      - published: 9090
+        target: 8080
+    healthcheck:
+      test: "curl --fail --silent http://localhost:8080/actuator/health | grep UP || exit 1"
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s

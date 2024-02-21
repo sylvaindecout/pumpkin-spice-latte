@@ -55,3 +55,12 @@ services:
       timeout: 5s
       retries: 5
       start_period: 10s
+
+  client-app:
+    build: ./client-app
+    depends_on:
+      modular-monolith:
+        condition: service_healthy
+    ports:
+      - published: 80
+        target: 80

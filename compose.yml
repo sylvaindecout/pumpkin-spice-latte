@@ -62,5 +62,14 @@ services:
       modular-monolith:
         condition: service_healthy
     ports:
-      - published: 80
-        target: 80
+      - published: 4200
+        target: 4200
+    working_dir: /home/node/app
+    command: sh -c "npm start"
+    volumes:
+      - type: bind
+        source: ./client-app
+        target: /home/node/app
+      - type: bind
+        source: ./client-app/node_modules
+        target: /home/node/app/node_modules

@@ -48,7 +48,11 @@ C4Container
 * Run tests for client app: `(cd client-app; npm run test-local)`
 * Run tests for back-end: `./gradlew test`
 * Run mutation coverage: `./gradlew pitest`
-* Start application: cf. [Local environment](./doc/local_env.md)
+* Start application:
+  1. Build packages (backend): `./gradlew build --exclude-task test`
+  2. Run on local environment: `docker compose up -d`
+  3. Client app can be accessed at http://localhost
+  4. Tear down local environment: `docker compose down`
 
 ## Guides
 

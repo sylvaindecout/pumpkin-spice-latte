@@ -51,7 +51,7 @@ C4Container
 * Start application:
   1. Build packages (backend): `./gradlew build --exclude-task test`
   2. Run on local environment: `docker compose up -d`
-  3. Client app can be accessed at http://localhost
+  3. Client app can be accessed at http://localhost:4200
   4. Tear down local environment: `docker compose down`
 
 ## Guides

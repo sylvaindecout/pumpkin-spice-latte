@@ -1,0 +1,75 @@
+version: '3.8'
+
+services:
+  database:
+    build: ./database
+    environment:
+      POSTGRES_DB: handson
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: user123
+    ports:
+      - published: 5432
+        target: 5432
+
+  modular-monolith:
+    build: ./modular-monolith
+    depends_on:
+      database:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://database:5432/handson?schema=handson
+    ports:
+      - published: 8080
+        target: 8080
+    healthcheck:
+      test: "curl --fail --silent http://localhost:8080/actuator/health | grep UP || exit 1"
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  init-data:
+    image: curlimages/curl:latest
+    volumes:
+      - type: bind
+        source: ./scripts
+        target: /scripts
+    depends_on:
+      modular-monolith:
+        condition: service_healthy
+    entrypoint: "/scripts/init-data.sh"
+
+  staff-simulator:
+    build: ./staff-simulator
+    depends_on:
+      modular-monolith:
+        condition: service_healthy
+    environment:
+      APPLICATION_STAFF_SIMULATOR_INFRA_PREPARATION_BASE_URL: http://modular-monolith:8080/preparation
+    ports:
+      - published: 9090
+        target: 8080
+    healthcheck:
+      test: "curl --fail --silent http://localhost:8080/actuator/health | grep UP || exit 1"
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  client-app:
+    build: ./client-app
+    depends_on:
+      modular-monolith:
+        condition: service_healthy
+    ports:
+      - published: 4200
+        target: 4200
+    working_dir: /home/node/app
+    command: sh -c "npm start"
+    volumes:
+      - type: bind
+        source: ./client-app
+        target: /home/node/app
+      - type: bind
+        source: ./client-app/node_modules
+        target: /home/node/app/node_modules

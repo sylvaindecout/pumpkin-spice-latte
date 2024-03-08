@@ -1,5 +1,6 @@
 package io.shodo.pumpkin.monolith.stepdefs;
 
+import io.cucumber.java.PendingException
 import io.cucumber.java.en.Given
 import io.cucumber.java.en.Then
 import io.cucumber.java.en.When
@@ -26,18 +27,10 @@ class OrderStepdefs {
 
     private val drinksSentToPreparation: MutableList<Drink>
     private fun allIngredientsAreInStock() = Stock { _, _ -> true }
+    private fun allIngredientsAreOutOfStock() = Stock { _, _ -> false }
 
-    private val service: OrderingService
 
-    @Then("^client is notify that the drink hot coca-cola doesn't exist$")
-    fun `client is notify that the drink hot coca-cola doesn't exist`() {
-        SoftAssertions.assertSoftly {
-            it.assertThatExceptionOfType(UnknownDrinkException::class.java)
-                .isThrownBy(call)
-                .withMessage("No drink exists with name ${testContext.drink}")
-            it.assertThat(drinksSentToPreparation).isEmpty()
-        }
-    }
+    private var service: OrderingService
 
     @When("he order, an hot coca-cola, drink not present on the menu$")
     fun `he order, an hot coca-cola, drink not present on the menu`() {
@@ -48,5 +41,38 @@ class OrderStepdefs {
     @Given("a client")
     fun a_client() {
         testContext.customer = Customer("Vincent");
+    }
+
+    @Given("latte ingredients are missing")
+    fun latte_ingredients_are_missing() {
+        service = OrderingService(
+            preparation = { drinksSentToPreparation += it },
+            menu = TestMenuItem.asMenu(),
+            stock = allIngredientsAreOutOfStock()
+        )
+    }
+
+    @When("he order a latte drink")
+    fun he_order_a_latte_drink() {
+        call = { service.process(Order(TestMenuItem.LATTE.drink, 1, Customer("Vincent"))) }
+    }
+
+    @Then("client is notify that the drink  is currently unavailable")
+    fun client_is_notify_that_the_drink_is_currently_unavailable() {
+        SoftAssertions.assertSoftly {
+            it.assertThatExceptionOfType(UnavailableIngredientException::class.java)
+                .isThrownBy(call)
+                .withMessage("Ingredient ${TestMenuItem.LATTE.recipe.asMap().keys.first()} is currently unavailable")
+            it.assertThat(drinksSentToPreparation).isEmpty()
+        }
+    }
+    @Then("^client is notify that the drink hot coca-cola doesn't exist$")
+    fun `client is notify that the drink hot coca-cola doesn't exist`() {
+        SoftAssertions.assertSoftly {
+            it.assertThatExceptionOfType(UnknownDrinkException::class.java)
+                .isThrownBy(call)
+                .withMessage("No drink exists with name ${testContext.drink}")
+            it.assertThat(drinksSentToPreparation).isEmpty()
+        }
     }
 }

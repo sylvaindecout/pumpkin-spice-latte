@@ -14,3 +14,10 @@ Feature: As a client I want to order my favorite drink
     Given latte ingredients are missing
     When he order a latte drink
     Then client is notify that the drink  is currently unavailable
+
+  Scenario: A client order a  latte drink
+
+    Given a client
+    When he order a latte drink
+    Then client is received an invoice with the price and the quantity
+    Then the drink is sent to the preparation

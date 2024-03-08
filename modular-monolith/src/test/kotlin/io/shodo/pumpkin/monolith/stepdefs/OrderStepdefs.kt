@@ -10,25 +10,14 @@ import io.shodo.pumpkin.monolith.shared.domain.DrinkName
 import org.assertj.core.api.SoftAssertions
 
 
-class OrderStepdefs {
+class OrderStepdefs(private val testContext: TestContext) {
 
 
-    private val testContext: TestContext
     private lateinit var call:() -> Unit
-    constructor(testContext: TestContext) {
-        this.testContext = testContext
-        this.drinksSentToPreparation = mutableListOf<Drink>()
-        this.service = OrderingService(
-            preparation = { drinksSentToPreparation += it },
-            menu = TestMenuItem.asMenu(),
-            stock = allIngredientsAreInStock()
-        )
-    }
 
-    private val drinksSentToPreparation: MutableList<Drink>
+    private val drinksSentToPreparation: MutableList<Drink> = mutableListOf<Drink>()
     private fun allIngredientsAreInStock() = Stock { _, _ -> true }
     private fun allIngredientsAreOutOfStock() = Stock { _, _ -> false }
-
 
     private var service: OrderingService
 
@@ -74,5 +63,32 @@ class OrderStepdefs {
                 .withMessage("No drink exists with name ${testContext.drink}")
             it.assertThat(drinksSentToPreparation).isEmpty()
         }
+    }
+
+    @Then("client is received an invoice with the price and the quantity")
+    fun client_is_received_an_invoice_with_the_price_and_the_quantity() {
+        SoftAssertions.assertSoftly {
+            it.assertThat(call)
+                .isEqualTo(Invoice(TestMenuItem.LATTE.drink, 1, TestMenuItem.LATTE.unitPrice))
+        }
+    }
+
+    @Then("the drink is sent to the preparation")
+    fun the_drink_is_sent_to_the_preparation() {
+        SoftAssertions.assertSoftly {
+            it.assertThat(drinksSentToPreparation).containsExactly(
+                Drink(TestMenuItem.LATTE.drink, TestMenuItem.LATTE.recipe, testContext.customer!!),
+                Drink(TestMenuItem.LATTE.drink, TestMenuItem.LATTE.recipe, testContext.customer!!),
+                Drink(TestMenuItem.LATTE.drink, TestMenuItem.LATTE.recipe, testContext.customer!!)
+            )
+        }
+    }
+
+    init {
+        this.service = OrderingService(
+            preparation = { drinksSentToPreparation += it },
+            menu = TestMenuItem.asMenu(),
+            stock = allIngredientsAreInStock()
+        )
     }
 }

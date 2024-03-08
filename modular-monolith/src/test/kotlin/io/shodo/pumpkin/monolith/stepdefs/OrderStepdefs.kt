@@ -3,12 +3,17 @@ package io.shodo.pumpkin.monolith.stepdefs;
 import io.cucumber.java.en.Given
 import io.cucumber.java.en.Then
 import io.cucumber.java.en.When
-import io.shodo.pumpkin.monolith.ordering.domain.Customer
+import io.shodo.pumpkin.monolith.ordering.domain.*
+import io.shodo.pumpkin.monolith.ordering.domain.preparation.Drink
+import io.shodo.pumpkin.monolith.shared.domain.DrinkName
+import org.assertj.core.api.SoftAssertions
 
 
-class OrderStepdefs(private val testContext: TestContext) {
+class OrderStepdefs {
 
-    /*
+
+    private val testContext: TestContext
+    private lateinit var call:() -> Unit
     constructor(testContext: TestContext) {
         this.testContext = testContext
         this.drinksSentToPreparation = mutableListOf<Drink>()
@@ -24,21 +29,24 @@ class OrderStepdefs(private val testContext: TestContext) {
 
     private val service: OrderingService
 
-/
-
- */
     @Then("^client is notify that the drink hot coca-cola doesn't exist$")
     fun `client is notify that the drink hot coca-cola doesn't exist`() {
-
+        SoftAssertions.assertSoftly {
+            it.assertThatExceptionOfType(UnknownDrinkException::class.java)
+                .isThrownBy(call)
+                .withMessage("No drink exists with name ${testContext.drink}")
+            it.assertThat(drinksSentToPreparation).isEmpty()
+        }
     }
+
     @When("he order, an hot coca-cola, drink not present on the menu$")
     fun `he order, an hot coca-cola, drink not present on the menu`() {
-        //val drink = DrinkName("UNKNOWN")
-        //val call: () -> Unit = { service.process(Order(drink, 1, testContext.customer!!)) }
+        testContext.drink = DrinkName("UNKNOWN")
+        call = { service.process(Order(testContext.drink, 1, testContext.customer!!)) }
     }
+
     @Given("a client")
     fun a_client() {
-        // Write code here that turns the phrase above into concrete actions
-        testContext.customer= Customer("Vincent");
+        testContext.customer = Customer("Vincent");
     }
 }

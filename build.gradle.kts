@@ -9,6 +9,7 @@ plugins {
   id("org.springframework.boot") version "3.2.0" apply false
   id("io.spring.dependency-management") version "1.1.4" apply false
   id("nu.studer.jooq") version "8.2.1" apply false
+  id("java")
 }
 
 allprojects {
@@ -27,5 +28,6 @@ subprojects {
   tasks.withType<Test>().configureEach {
     println("Configuring JUnit platform for $name in project ${project.name}...")
     useJUnitPlatform()
+    systemProperty("cucumber.junit-platform.naming-strategy", "long")
   }
 }

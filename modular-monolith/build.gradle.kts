@@ -10,6 +10,7 @@ val kotlinLoggingVersion = "3.0.5"
 val liquibaseVersion = "4.25.0"
 val mockitoKotlinVersion = "5.1.0"
 val testcontainersVersion = "1.19.3"
+val cucumberVersion = "7.15.0"
 
 plugins {
   kotlin("jvm")
@@ -35,6 +36,7 @@ dependencies {
   implementation("org.springframework.boot", "spring-boot-starter-jooq")
   implementation("org.jooq", "jooq-meta-extensions-liquibase", jooqLiquibaseVersion)
   implementation("org.jooq", "jooq-kotlin")
+  implementation("io.cucumber:cucumber-picocontainer:7.15.0")
 
   implementation("org.liquibase", "liquibase-core", liquibaseVersion)
 
@@ -48,11 +50,18 @@ dependencies {
   testImplementation("org.springframework.boot", "spring-boot-starter-test") {
     exclude("org.junit.vintage", "junit-vintage-engine")
   }
+
   testImplementation("com.squareup.okhttp3", "mockwebserver")
   testImplementation(platform("org.testcontainers:testcontainers-bom:$testcontainersVersion"))
   testImplementation("org.testcontainers", "postgresql")
 
   testImplementation("org.mockito.kotlin", "mockito-kotlin", mockitoKotlinVersion)
+  testImplementation("io.cucumber","cucumber-java",cucumberVersion)
+  testImplementation("io.cucumber","cucumber-junit",cucumberVersion)
+  testImplementation("io.cucumber","cucumber-java8",cucumberVersion)
+  testImplementation("io.cucumber","cucumber-junit-platform-engine",cucumberVersion)
+  testImplementation("org.junit.platform","junit-platform-suite")
+  testImplementation(platform("io.cucumber:cucumber-bom:7.15.0"))
 }
 
 springBoot {
